@@ -193,7 +193,7 @@ const products = [
 const categoryNames = {"uniformes":"Uniformes","casacas":"Casacas","chalecos":"Chalecos","pantalones":"Pantalones","polos":"Polos"};
 const whatsappNumber = "51993332950";
 const whatsappUrl = message => "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message);
-const generalWhatsAppMessage = "Hola, Morez Industrial. Deseo información y una cotización de ropa de trabajo. Me gustaría conocer modelos, tallas, colores y precios.";
+const generalWhatsAppMessage = "Hola, More Z Industrial. Deseo información y una cotización de ropa de trabajo. Me gustaría conocer modelos, tallas, colores y precios.";
 
 const menu = document.querySelector(".menu");
 const nav = document.getElementById("navegacion");
@@ -237,7 +237,7 @@ document.querySelectorAll("[data-product]").forEach(button => {
     document.getElementById("modal-title").textContent = product.title;
     document.getElementById("modal-category").textContent = categoryNames[product.category];
     document.getElementById("modal-description").textContent = product.description;
-    document.getElementById("modal-quote").href = whatsappUrl("Hola, Morez Industrial. Deseo información y cotización de la prenda: " + product.title + ". Quisiera conocer tallas, colores, precio y disponibilidad.");
+    document.getElementById("modal-quote").href = whatsappUrl("Hola, More Z Industrial. Deseo información y cotización de la prenda: " + product.title + ". Quisiera conocer tallas, colores, precio y disponibilidad.");
     modal.showModal();
   });
 });
@@ -273,10 +273,32 @@ if (form) {
   form.addEventListener("submit", event => {
     event.preventDefault();
     const values = new FormData(form);
-    const body = "Hola, Morez Industrial:\n\nSolicito una cotización.\n\nNombre: " + values.get("name") +
+    const body = "Hola, More Z Industrial:\n\nSolicito una cotización.\n\nNombre: " + values.get("name") +
       "\nEmpresa: " + values.get("company") + "\nCorreo: " + values.get("email") +
       "\nTeléfono: " + values.get("phone") + "\n\nPedido:\n" + values.get("message");
     location.href = whatsappUrl(body);
     document.getElementById("form-note").textContent = "WhatsApp se abrirá con tu solicitud preparada. Revisa el mensaje y presiona enviar.";
   });
+}
+// Botón flotante de WhatsApp para contacto rápido.
+const addWhatsAppButton = () => {
+  const phone = '51993332950';
+  const message = encodeURIComponent('Hola, quisiera información sobre los uniformes industriales de More Z Industrial.');
+
+  if (document.querySelector('.whatsapp-float')) return;
+
+  const button = document.createElement('a');
+  button.className = 'whatsapp-float';
+  button.href = `https://wa.me/${phone}?text=${message}`;
+  button.target = '_blank';
+  button.rel = 'noopener noreferrer';
+  button.setAttribute('aria-label', 'Escribir por WhatsApp');
+  button.innerHTML = '<span aria-hidden="true"><svg viewBox="0 0 32 32" role="img"><path d="M16 3.2a12.7 12.7 0 0 0-10.9 19L3.2 29l6.9-1.8A12.8 12.8 0 1 0 16 3.2Zm0 23.2a10.4 10.4 0 0 1-5.3-1.5l-.4-.2-4.1 1.1 1.1-4-.3-.4a10.4 10.4 0 1 1 9 5Zm5.7-7.8c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.3-.7.1a8.3 8.3 0 0 1-2.4-1.5 9.2 9.2 0 0 1-1.7-2.1c-.2-.3 0-.5.2-.7l.5-.6c.2-.2.2-.4.3-.6 0-.2 0-.4-.1-.6l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.3 3.6 5.6 5 .8.3 1.4.5 1.9.6.8.3 1.6.2 2.2.1.7-.1 1.8-.8 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.2-.3-.3-.6-.5Z"/></svg></span>';
+  document.body.appendChild(button);
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', addWhatsAppButton, { once: true });
+} else {
+  addWhatsAppButton();
 }
